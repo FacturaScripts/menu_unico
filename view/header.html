@@ -73,24 +73,32 @@
                   </a>
                   <ul class="dropdown-menu mega-dropdown-menu row">
                      {loop="$fsc->folders()"}
-                     <li class="col-sm-4 col-md-3 col-lg-2">
+                     <li class="col-sm-3 col-lg-2">
                         <ul>
                            <li class='dropdown-header{if="$value1==$fsc->page->folder"} active{/if}'>
-                              {if="$value1=='admin'"}
-                                 <span class="glyphicon glyphicon-wrench hidden-xs" title="Administración"></span>
-                                 <span class="text-capitalize visible-xs">{$value1}</span>
+                              {if="$value1==$fsc->page->folder"}
+                              <i class="fa fa-folder-open" aria-hidden="true"></i>
                               {else}
-                                 <span class="text-capitalize">{$value1}</span>
+                              <i class="fa fa-folder-open-o" aria-hidden="true"></i>
                               {/if}
+                              <span class="text-capitalize">{$value1}</span>
                               {loop="$fsc->pages($value1)"}
-                                 <li{if="$value2->showing()"} class="active"{/if}><a href="{$value2->url()}">{$value2->title}</a></li>
+                                 {if="$value2->showing()"}
+                                 <li class="active">
+                                    <a href="{$value2->url()}">
+                                       {$value2->title} <i class="fa fa-check" aria-hidden="true"></i>
+                                    </a>
+                                 </li>
+                                 {else}
+                                 <li><a href="{$value2->url()}">{$value2->title}</a></li>
+                                 {/if}
                               {/loop}
                            </li>
                         </ul>
                      </li>
                      {/loop}
                   </ul>
-                  </li>
+               </li>
             </ul>
             
             <ul class="nav navbar-nav navbar-left">
