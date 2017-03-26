@@ -1,0 +1,56 @@
+/**
+ * Menú basado en: 
+ * http://bootsnipp.com/snippets/featured/mega-menu-slide-down-on-hover-with-carousel
+ * http://bootsnipp.com/snippets/featured/bootstrap-mega-menu
+ */
+.navbar-default .navbar-nav>li>a {
+   font-weight: bold;
+}
+.navbar-default .mega-dropdown {
+   position: static !important;
+}
+.navbar-default .mega-dropdown-menu {
+   padding: 20px 0px;
+   width: 100%;
+   box-shadow: none;
+   -webkit-box-shadow: none;
+}
+.navbar-default .mega-dropdown-menu > li > ul {
+   padding: 0;
+   margin: 0;
+}
+.navbar-default .mega-dropdown-menu > li > ul > li {
+   list-style: none;
+}
+.navbar-default .mega-dropdown-menu > li ul > li > a:hover, 
+.navbar-default .mega-dropdown-menu > li ul > li.active,
+.navbar-default .mega-dropdown-menu > li ul > li.active:hover,
+.navbar-default .mega-dropdown-menu > li ul > li.active > a,
+.navbar-default .mega-dropdown-menu > li ul > li.active > a:hover,
+.navbar-default .mega-dropdown-menu > li ul > li > a:hover{
+   list-style: none;
+   text-decoration: none;
+   background-color: #272727;
+}
+.navbar-default .mega-dropdown-menu > li > ul > li > a {
+   display: block;
+   padding: 3px 20px;
+   clear: both;
+   font-weight: normal;
+   line-height: 1.428571429;
+   color: #999;
+   white-space: normal;
+}
+.navbar-default .mega-dropdown-menu .dropdown-header {
+   font-size: 18px;
+   font-weight: bold;
+   padding: 5px 60px 5px 5px;
+   line-height: 30px;
+
+}
+.navbar-default .mega-dropdown-menu form {
+   margin: 3px 20px;
+}
+.navbar-default .mega-dropdown-menu .form-group {
+   margin-bottom: 3px;
+}
