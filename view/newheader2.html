@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es" >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>{$fsc->page->title} &lsaquo; {if="$fsc->empresa->nombrecorto"}{$fsc->empresa->nombrecorto}{else}{$fsc->empresa->nombre}{/if}</title>
+        <meta name="description" content="FacturaScripts es un software de facturación y contabilidad para pymes. Es software libre bajo licencia GNU/LGPL." />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="FacturaScripts" />
+        <link href="{#FS_PATH#}plugins/{$fsc->mypluginname}/view/css/carousel.css" rel="stylesheet" type="text/css" />
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>        
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">MegaMenu</a>
+                </div>
+
+
+                <div class="collapse navbar-collapse js-navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown mega-dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Collection <span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
+
+                            <ul class="dropdown-menu mega-dropdown-menu row">
+                                <li class="col-sm-3">
+                                    <ul>
+                                        <li class="dropdown-header">New in Stores</li>                            
+                                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <div class="item active">
+                                                    <a href="#"><img src="http://placehold.it/254x150/3498db/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 1"></a>
+                                                    <h4><small>Summer dress floral prints</small></h4>                                        
+                                                    <button class="btn btn-primary" type="button">49,99 €</button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>       
+                                                </div><!-- End Item -->
+                                                <div class="item">
+                                                    <a href="#"><img src="http://placehold.it/254x150/ef5e55/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 2"></a>
+                                                    <h4><small>Gold sandals with shiny touch</small></h4>                                        
+                                                    <button class="btn btn-primary" type="button">9,99 €</button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>        
+                                                </div><!-- End Item -->
+                                                <div class="item">
+                                                    <a href="#"><img src="http://placehold.it/254x150/2ecc71/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 3"></a>
+                                                    <h4><small>Denin jacket stamped</small></h4>                                        
+                                                    <button class="btn btn-primary" type="button">49,99 €</button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>      
+                                                </div><!-- End Item -->                                
+                                            </div><!-- End Carousel Inner -->
+                                        </div><!-- /.carousel -->
+                                        <li class="divider"></li>
+                                        <li><a href="#">View all Collection <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="col-sm-3">
+                                    <ul>
+                                        {loop="$fsc->folders()"}
+                                        <li class="dropdown-header">
+                                            <a href="#" >
+                                                {if="$value1=='admin'"}
+                                                <span class="glyphicon glyphicon-wrench hidden-xs" title="Administración"></span>
+                                                <span class="text-capitalize visible-xs">{$value1}</span>
+                                                {else}
+                                                <span class="text-capitalize">{$value1}</span>
+                                                {/if}
+                                            </a>
+                                            <ul>
+                                                {loop="$fsc->pages($value1)"}
+                                                <li><a href="{$value2->url()}">{$value2->title}</a></li>
+                                                {/loop}
+                                            </ul>
+                                        </li>
+                                        {/loop}
+                                    </ul>
+                                </li>
+                                {if="count($GLOBALS['plugins'])>0"}
+                                <li class="dropdown-header">
+                                    <ul>
+                                        {$menu_ar_vacio=TRUE}
+                                        {loop="$fsc->user->get_menu()"}
+                                        {if="$value->important"}
+                                        <li><a href="{$value->url()}">{$value->title}</a></li>
+                                        {$menu_ar_vacio=FALSE}
+                                        {/if}
+                                        {/loop}
+                                        {if="$menu_ar_vacio"}
+                                        <li><a href="#">Vacío</a></li>
+                                        {/if}
+                                    </ul>
+                                </li>
+                                {/if}
+                            </ul>
+
+                        </li>
+                    </ul>
+
+                </div><!-- /.nav-collapse -->
+            </nav>
+        </div>
