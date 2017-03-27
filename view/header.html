@@ -65,6 +65,11 @@
             </a>
          </div>
          
+         <!--
+         {$busca_articulos=FALSE}{$busca_asientos=FALSE}{$busca_clientes=FALSE}{$busca_contactos=FALSE}
+         {$busca_cuentas=FALSE}{$busca_facturascli=FALSE}{$busca_facturasprov=FALSE}{$busca_proveedores=FALSE}
+         -->
+         
          <div class="collapse navbar-collapse" id="js-navbar-collapse">
             <ul class="nav navbar-nav navbar-left">
                <li class="dropdown mega-dropdown">
@@ -73,6 +78,13 @@
                   </a>
                   <div class="dropdown-menu mega-dropdown-menu">
                      <div class="row">
+                        {if="$fsc->check_for_updates()"}
+                        <div class="col-sm-3 col-lg-2">
+                           <a href="updater.php" class="btn btn-sm btn-block btn-info">
+                              <span class="glyphicon glyphicon-upload"></span> Hay actualizaciones
+                           </a>
+                        </div>
+                        {/if}
                         {loop="$fsc->user->get_menu()"}
                            {if="$value->important AND !$value->show_on_menu"}
                            <div class="col-sm-3 col-lg-2">
@@ -80,11 +92,30 @@
                                  <i class="fa fa-star" aria-hidden="true"></i>&nbsp; {$value->title}
                               </a>
                            </div>
+                           {elseif="$value->name=='compras_facturas'"}
+                           {$busca_facturasprov=TRUE}
+                           {elseif="$value->name=='compras_proveedores'"}
+                           {$busca_proveedores=TRUE}
+                           {elseif="$value->name=='contabilidad_asientos'"}
+                           {$busca_asientos=TRUE}
+                           {elseif="$value->name=='contabilidad_cuentas'"}
+                           {$busca_cuentas=TRUE}
+                           {elseif="$value->name=='crm_contactos'"}
+                           {$busca_contactos=TRUE}
+                           {elseif="$value->name=='ventas_articulos'"}
+                           {$busca_articulos=TRUE}
+                           {elseif="$value->name=='ventas_clientes'"}
+                           {$busca_clientes=TRUE}
+                           {elseif="$value->name=='ventas_facturas'"}
+                           {$busca_facturascli=TRUE}
                            {/if}
                         {/loop}
                      </div>
                      <div class="row">
                         {loop="$fsc->folders()"}
+                        {if="$counter%6==0"}
+                        </div><div class="row">
+                        {/if}
                         <div class="col-sm-3 col-lg-2">
                            <h4 class="text-capitalize">
                               {if="$value1==$fsc->page->folder"}
@@ -117,105 +148,81 @@
                      <span class="glyphicon glyphicon-search"></span>
                   </a>
                   <div class="dropdown-menu mega-dropdown-menu">
+                     <form name="f_mega_menu" action="index.php" method="get" class="form">
+                        <div class="row">
+                           <div class="col-sm-12 col-lg-12">
+                              <h4>Buscar...</h4>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-sm-3 col-lg-2">
+                              <div class="form-group">
+                                 <select name="page" class="form-control">
+                                    {if="$busca_articulos"}<option value="ventas_articulos">Artículos</option>{/if}
+                                    {if="$busca_asientos"}<option value="contabilidad_asientos">Asientos</option>{/if}
+                                    {if="$busca_clientes"}<option value="ventas_clientes" selected="">Clientes</option>{/if}
+                                    {if="$busca_contactos"}<option value="crm_contactos">Contactos</option>{/if}
+                                    {if="$busca_cuentas"}<option value="contabilidad_cuentas">Cuentas / subcuentas</option>{/if}
+                                    {if="$busca_facturasprov"}<option value="compras_facturas">Facturas de compra</option>{/if}
+                                    {if="$busca_facturascli"}<option value="ventas_facturas">Facturas de venta</option>{/if}
+                                    {if="$busca_proveedores"}<option value="compras_proveedores">Proveedores</option>{/if}
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="col-sm-3 col-lg-2">
+                              <div class="form-group">
+                                 <input class="form-control" type="text" name="query" autocomplete="off" required="" placeholder="Buscar">
+                              </div>
+                           </div>
+                           <div class="col-sm-3 col-lg-2">
+                              <div class="form-group">
+                                 <button class="btn btn-primary" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>&nbsp; Buscar
+                                 </button>
+                              </div>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+               </li>
+               {if="$fsc->get_last_changes()"}
+               <li class="dropdown mega-dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                     <span class="glyphicon glyphicon-time"></span>
+                  </a>
+                  <div class="dropdown-menu mega-dropdown-menu">
                      <div class="row">
-                        <div class="col-sm-3 col-lg-2">
-                           <form name="f_mega_menu_proveedores" action="index.php?page=compras_proveedores" method="post" class="form">
-                              <div class="form-group">
-                                 <h4>
-                                    <i class="fa fa-users" aria-hidden="true"></i> Proveedores
-                                 </h4>
-                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                       <span class="glyphicon glyphicon-search"></span>
-                                    </span>
-                                    <input class="form-control" type="text" name="query" autocomplete="off" placeholder="Buscar">
-                                 </div>
-                              </div>
-                           </form>
-                        </div>
-                        <div class="col-sm-3 col-lg-2">
-                           <form name="f_mega_menu_cuentas" action="index.php?page=contabilidad_cuentas" method="post" class="form">
-                              <div class="form-group">
-                                 <h4>
-                                    <i class="fa fa-balance-scale" aria-hidden="true"></i> Cuentas
-                                 </h4>
-                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                       <span class="glyphicon glyphicon-search"></span>
-                                    </span>
-                                    <input class="form-control" type="text" name="query" autocomplete="off" placeholder="Buscar">
-                                 </div>
-                              </div>
-                           </form>
-                        </div>
-                        <div class="col-sm-3 col-lg-2">
-                           <form name="f_mega_menu_clientes" action="index.php?page=ventas_clientes" method="post" class="form">
-                              <div class="form-group">
-                                 <h4>
-                                    <i class="fa fa-users" aria-hidden="true"></i> Clientes
-                                 </h4>
-                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                       <span class="glyphicon glyphicon-search"></span>
-                                    </span>
-                                    <input class="form-control" type="text" name="query" autocomplete="off" placeholder="Buscar">
-                                 </div>
-                              </div>
-                           </form>
-                        </div>
-                        <div class="col-sm-3 col-lg-2">
-                           <form name="f_mega_menu_articulos" action="index.php?page=ventas_articulos" method="post" class="form">
-                              <div class="form-group">
-                                 <h4>
-                                    <i class="fa fa-cubes" aria-hidden="true"></i> Artículos
-                                 </h4>
-                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                       <span class="glyphicon glyphicon-search"></span>
-                                    </span>
-                                    <input class="form-control" type="text" name="query" autocomplete="off" placeholder="Buscar">
-                                 </div>
-                              </div>
-                           </form>
+                        <div class="col-sm-12">
+                           <h4>
+                              <span class="glyphicon glyphicon-time"></span> Historial de cambios:
+                           </h4>
+                           <div class="table-responsive">
+                              <table class="table table-hover">
+                                 <thead>
+                                    <tr>
+                                       <th>Documento</th>
+                                       <th>Url</th>
+                                    </tr>
+                                 </thead>
+                                 {loop="$fsc->get_last_changes()"}
+                                 <tr>
+                                    <td>
+                                       <a href="{$value['url']}">{$value['texto']}</a>
+                                       {if="$value['nuevo']"}<span class="label label-info">nuevo</span>{/if}
+                                    </td>
+                                    <td>{$value['url']}</td>
+                                 </tr>
+                                 {/loop}
+                              </table>
+                           </div>
                         </div>
                      </div>
                   </div>
                </li>
+               {/if}
             </ul>
             
             <ul class="nav navbar-nav navbar-right">
-               {if="$fsc->check_for_updates()"}
-               <li class="dropdown">
-                  <a href="updater.php" class="bg-primary" title="Hay actualizaciones disponibles">
-                     <span class="glyphicon glyphicon-upload hidden-xs"></span>
-                     <span class="visible-xs">Actualizaciones</span>
-                  </a>
-               </li>
-               {/if}
-               
-               {if="$fsc->get_last_changes()"}
-               <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                     <span class="glyphicon glyphicon-time hidden-xs"></span>
-                     <span class="visible-xs">Historial</span>
-                  </a>
-                  <ul class="dropdown-menu">
-                     {loop="$fsc->get_last_changes()"}
-                        <li title="{if="$value['nuevo']"}creado{else}modificado{/if} el {$value['cambio']}">
-                           <a href="{$value['url']}">
-                              {if="$value['nuevo']"}
-                              <span class="glyphicon glyphicon-file"></span> &nbsp;
-                              {else}
-                              <span class="glyphicon glyphicon-edit"></span> &nbsp;
-                              {/if}
-                              {$value['texto']}
-                           </a>
-                        </li>
-                     {/loop}
-                  </ul>
-               </li>
-               {/if}
-               
                <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Ayuda">
                      <span class="glyphicon glyphicon-question-sign hidden-xs"></span>
