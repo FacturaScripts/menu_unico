@@ -1,8 +1,14 @@
 /**
- * Menú basado en: 
+ * Menú basado en:
  * http://bootsnipp.com/snippets/featured/mega-menu-slide-down-on-hover-with-carousel
  * http://bootsnipp.com/snippets/featured/bootstrap-mega-menu
  */
+.dropdown-menu {
+    max-height: 500px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
 .navbar .navbar-nav > li > a {
    font-weight: bold;
 }
@@ -18,9 +24,39 @@
    border-bottom: 1px solid #333;
 }
 .navbar .mega-dropdown-menu .dropdown-header {
-   font-size: 18px;
+   font-size: 1.2em;
    font-weight: bold;
-   padding: 5px 60px 5px 5px;
-   line-height: 30px;
+   padding: 5px 40px 5px 5px;
+   line-height: 15px;
    color: #333;
+}
+
+li.mega-dropdown-item {
+  list-style: none;
+  margin-left: -15px;
+  padding-left: 0px;
+}
+
+li.mega-dropdown-active {
+  list-style: none;
+  margin-left: -15px;
+  font-weight: bold;
+}
+
+li.mega-dropdown-item > a {
+  display: block;
+  padding: 2px 1px;
+  clear: both;
+  font-size: 1em;
+  font-weight: normal;
+  line-height: 1.428571429;
+  color: #333333;
+  white-space: normal;
+}
+
+.mega-dropdown-item > a:hover,
+.mega-dropdown-item > a:focus {
+  text-decoration: none;
+  color: #fff;
+  background-color: #999;
 }

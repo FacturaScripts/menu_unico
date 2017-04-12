@@ -21,11 +21,11 @@
    <script type="text/javascript" src="{#FS_PATH#}view/js/bootbox.min.js"></script>
    <script type="text/javascript">
       bootbox.setLocale("es");
-      
+
       function show_precio(precio, coddivisa)
       {
          coddivisa || ( coddivisa = '{$fsc->empresa->coddivisa}' );
-         
+
          if(coddivisa == '{$fsc->empresa->coddivisa}')
          {
             {if="FS_POS_DIVISA=='right'"}
@@ -64,12 +64,12 @@
                <span class="hidden-sm">{if="FS_DEMO"}DEMO{elseif="$fsc->empresa->nombrecorto"}{$fsc->empresa->nombrecorto}{else}{$fsc->empresa->nombre}{/if}</span>
             </a>
          </div>
-         
+
          <!--
          {$busca_articulos=FALSE}{$busca_asientos=FALSE}{$busca_clientes=FALSE}{$busca_contactos=FALSE}
          {$busca_cuentas=FALSE}{$busca_facturascli=FALSE}{$busca_facturasprov=FALSE}{$busca_proveedores=FALSE}
          -->
-         
+
          <div class="collapse navbar-collapse" id="js-navbar-collapse">
             <ul class="nav navbar-nav navbar-left">
                <li class="dropdown mega-dropdown">
@@ -80,7 +80,7 @@
                      <div class="row">
                         {if="$fsc->check_for_updates()"}
                         <div class="col-sm-3 col-lg-2">
-                           <a href="updater.php" class="btn btn-sm btn-block btn-info">
+                           <a href="{#FS_PATH#}updater.php" class="btn btn-sm btn-block btn-info">
                               <span class="glyphicon glyphicon-upload"></span> Hay actualizaciones
                            </a>
                         </div>
@@ -88,7 +88,7 @@
                         {loop="$fsc->user->get_menu()"}
                            {if="$value->important AND !$value->show_on_menu"}
                            <div class="col-sm-3 col-lg-2">
-                              <a href="{$value->url()}" class="btn btn-sm btn-block btn-default">
+                              <a href="{$value->url()}" class="btn btn-sm btn-block btn-warning">
                                  <i class="fa fa-star" aria-hidden="true"></i>&nbsp; {$value->title}
                               </a>
                            </div>
@@ -111,33 +111,34 @@
                            {/if}
                         {/loop}
                      </div>
-                     <div class="row">
+                     <div class="row" style="overflow: auto !important;">
                         {loop="$fsc->folders()"}
                         {if="$counter%6==0"}
                         </div><div class="row">
                         {/if}
                         <div class="col-sm-3 col-lg-2">
-                           <h4 class="text-capitalize">
+                           <h3 class="text-capitalize dropdown-header">
                               {if="$value1==$fsc->page->folder"}
                               <i class="fa fa-folder-open" aria-hidden="true"></i>
                               {else}
                               <i class="fa fa-folder-open-o" aria-hidden="true"></i>
                               {/if}
                               {$value1}
-                           </h4>
+                           </h3>
                            <ul>
                               {loop="$fsc->pages($value1)"}
                                  {if="$value2->showing()"}
-                                 <li class="active">
+                                 <li class="mega-dropdown-active">
                                     <a href="{$value2->url()}">
                                        {$value2->title} <i class="fa fa-check" aria-hidden="true"></i>
                                     </a>
                                  </li>
                                  {else}
-                                 <li><a href="{$value2->url()}">{$value2->title}</a></li>
+                                 <li class="mega-dropdown-item"><a href="{$value2->url()}">{$value2->title}</a></li>
                                  {/if}
                               {/loop}
                            </ul>
+                           <div class="divider"></div>
                         </div>
                         {/loop}
                      </div>
@@ -221,7 +222,7 @@
                </li>
                {/if}
             </ul>
-            
+
             <ul class="nav navbar-nav navbar-right">
                <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Ayuda">
@@ -258,7 +259,7 @@
                      <li><a href="#" id="b_feedback"><span class="glyphicon glyphicon-send"></span>&nbsp; Informar...</a></li>
                   </ul>
                </li>
-               
+
                <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="{$fsc->user->nick}">
                      <span class="glyphicon glyphicon-user hidden-xs"></span>
@@ -282,13 +283,13 @@
          </div>
       </div>
    </nav>
-   
+
    {if="$fsc->user->css=='view/css/bootstrap-yeti.min.css'"}
    <div style="margin-bottom: 55px"></div>
    {else}
    <div style="margin-bottom: 70px"></div>
    {/if}
-   
+
    {if="$fsc->get_errors()"}
    <div class="alert alert-danger alert-dismissible hidden-print" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -313,9 +314,9 @@
       <ul>{loop="$fsc->get_advices()"}<li>{$value}</li>{/loop}</ul>
    </div>
    {/if}
-   
+
    {include="feedback"}
-   
+
    <div class="modal fade" id="modal_iframe" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
          <div class="modal-content">
