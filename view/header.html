@@ -11,14 +11,14 @@
    <link rel="stylesheet" href="{#FS_PATH#}view/css/font-awesome.min.css" />
    <link rel="stylesheet" href="{#FS_PATH#}view/css/datepicker.css" />
    <link rel="stylesheet" href="{#FS_PATH#}view/css/custom.css" />
-   <link rel="stylesheet" href="{#FS_PATH#}plugins/menu_unico/view/css/mega-dropdown.css" />
+   <link rel="stylesheet" href="{#FS_PATH#}plugins/menu_unico/view/css/mega-dropdown.css?updated={$fsc->today()}" />
    <script type="text/javascript" src="{#FS_PATH#}view/js/jquery.min.js"></script>
    <script type="text/javascript" src="{#FS_PATH#}view/js/bootstrap.min.js"></script>
    <script type="text/javascript" src="{#FS_PATH#}view/js/bootstrap-datepicker.js" charset="UTF-8"></script>
    <script type="text/javascript" src="{#FS_PATH#}view/js/jquery.autocomplete.min.js"></script>
    <script type="text/javascript" src="{#FS_PATH#}view/js/jquery-ui.min.js"></script>
-   <script type="text/javascript" src="{#FS_PATH#}view/js/base.js?updated={$fsc->today()}"></script>
    <script type="text/javascript" src="{#FS_PATH#}view/js/bootbox.min.js"></script>
+   <script type="text/javascript" src="{#FS_PATH#}view/js/base.js?updated={$fsc->today()}"></script>
    <script type="text/javascript">
       bootbox.setLocale("es");
 
@@ -60,7 +60,7 @@
                <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="index.php">
-               <span class="glyphicon glyphicon-home"></span> &nbsp;
+               <i class="fa fa-home" aria-hidden="true"></i>&nbsp;
                <span class="hidden-sm">{if="FS_DEMO"}DEMO{elseif="$fsc->empresa->nombrecorto"}{$fsc->empresa->nombrecorto}{else}{$fsc->empresa->nombre}{/if}</span>
             </a>
          </div>
@@ -81,7 +81,7 @@
                         {if="$fsc->check_for_updates()"}
                         <div class="col-sm-3 col-lg-2">
                            <a href="{#FS_PATH#}updater.php" class="btn btn-sm btn-block btn-info">
-                              <span class="glyphicon glyphicon-upload"></span> Hay actualizaciones
+                              <i class="fa fa-cloud-upload" aria-hidden="true"></i>&nbsp; Hay actualizaciones
                            </a>
                         </div>
                         {/if}
@@ -111,42 +111,44 @@
                            {/if}
                         {/loop}
                      </div>
-                     <div class="row" style="overflow: auto !important;">
+                     <div class="row">
                         {loop="$fsc->folders()"}
                         {if="$counter%6==0"}
                         </div><div class="row">
                         {/if}
                         <div class="col-sm-3 col-lg-2">
-                           <h3 class="text-capitalize dropdown-header">
+                           <h4 class="text-capitalize">
                               {if="$value1==$fsc->page->folder"}
-                              <i class="fa fa-folder-open" aria-hidden="true"></i>
+                              <i class="fa fa-folder-open" aria-hidden="true"></i> <b>{$value1}</b>
                               {else}
-                              <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+                              <i class="fa fa-folder-open-o" aria-hidden="true"></i> {$value1}
                               {/if}
-                              {$value1}
-                           </h3>
+                           </h4>
                            <ul>
                               {loop="$fsc->pages($value1)"}
                                  {if="$value2->showing()"}
-                                 <li class="mega-dropdown-active">
+                                 <li class="active">
                                     <a href="{$value2->url()}">
-                                       {$value2->title} <i class="fa fa-check" aria-hidden="true"></i>
+                                       <i class="fa fa-circle" aria-hidden="true"></i>&nbsp; {$value2->title}
                                     </a>
                                  </li>
                                  {else}
-                                 <li class="mega-dropdown-item"><a href="{$value2->url()}">{$value2->title}</a></li>
+                                 <li>
+                                    <a href="{$value2->url()}">
+                                       <i class="fa fa-circle-o" aria-hidden="true"></i>&nbsp; {$value2->title}
+                                    </a>
+                                 </li>
                                  {/if}
                               {/loop}
                            </ul>
-                           <div class="divider"></div>
-                        </div>
+                           </div>
                         {/loop}
                      </div>
                   </div>
                </li>
                <li class="dropdown mega-dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                     <span class="glyphicon glyphicon-search"></span>
+                     <i class="fa fa-search" aria-hidden="true"></i>
                   </a>
                   <div class="dropdown-menu mega-dropdown-menu">
                      <form name="f_mega_menu" action="index.php" method="get" class="form">
@@ -178,7 +180,7 @@
                            <div class="col-sm-3 col-lg-2">
                               <div class="form-group">
                                  <button class="btn btn-primary" type="submit">
-                                    <span class="glyphicon glyphicon-search"></span>&nbsp; Buscar
+                                    <i class="fa fa-search" aria-hidden="true"></i>&nbsp; Buscar
                                  </button>
                               </div>
                            </div>
@@ -189,13 +191,13 @@
                {if="$fsc->get_last_changes()"}
                <li class="dropdown mega-dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                     <span class="glyphicon glyphicon-time"></span>
+                     <i class="fa fa-clock-o" aria-hidden="true"></i>
                   </a>
                   <div class="dropdown-menu mega-dropdown-menu">
                      <div class="row">
                         <div class="col-sm-12">
                            <h4>
-                              <span class="glyphicon glyphicon-time"></span> Historial de cambios:
+                              <i class="fa fa-clock" aria-hidden="true"></i> Historial de cambios:
                            </h4>
                            <div class="table-responsive">
                               <table class="table table-hover">
@@ -225,8 +227,10 @@
 
             <ul class="nav navbar-nav navbar-right">
                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Ayuda">
-                     <span class="glyphicon glyphicon-question-sign hidden-xs"></span>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                     <span class="hidden-xs">
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp; Ayuda
+                     </span>
                      <span class="visible-xs">Ayuda</span>
                   </a>
                   <ul class="dropdown-menu">
@@ -236,13 +240,8 @@
                         </a>
                      </li>
                      <li>
-                        <a href="https://www.facturascripts.com/noticias" target="_blank">
-                           <i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp; Noticias
-                        </a>
-                     </li>
-                     <li>
-                        <a href="https://www.facturascripts.com/preguntas" target="_blank">
-                           <i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp; Preguntas
+                        <a href="https://www.facturascripts.com/contacto" target="_blank">
+                           <i class="fa fa-shield" aria-hidden="true"></i>&nbsp; Soporte oficial
                         </a>
                      </li>
                      <li>
@@ -256,25 +255,28 @@
                         </a>
                      </li>
                      <li class="divider"></li>
-                     <li><a href="#" id="b_feedback"><span class="glyphicon glyphicon-send"></span>&nbsp; Informar...</a></li>
+                     <li>
+                        <a href="#" id="b_feedback">
+                           <i class="fa fa-edit" aria-hidden="true"></i>&nbsp; Informar de error...
+                        </a>
+                     </li>
                   </ul>
                </li>
 
                <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="{$fsc->user->nick}">
-                     <span class="glyphicon glyphicon-user hidden-xs"></span>
-                     <span class="visible-xs">Usuario</span>
+                     <i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp; {$fsc->user->nick}
                   </a>
                   <ul class="dropdown-menu">
                      <li>
                         <a href="{$fsc->user->url()}">
-                           <span class="glyphicon glyphicon-user"></span>&nbsp; {$fsc->user->nick}
+                           <i class="fa fa-edit" aria-hidden="true"></i>&nbsp; editar perfil
                         </a>
                      </li>
                      <li class="divider"></li>
                      <li>
                         <a href="{$fsc->url()}&logout=TRUE">
-                           <span class="glyphicon glyphicon-log-out"></span>&nbsp; Cerrar sesión
+                           <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp; Cerrar sesión
                         </a>
                      </li>
                   </ul>
