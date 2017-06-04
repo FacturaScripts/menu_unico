@@ -10,7 +10,7 @@
    <link rel="stylesheet" href="{#FS_PATH#}{$fsc->user->css}" />
    <link rel="stylesheet" href="{#FS_PATH#}view/css/font-awesome.min.css" />
    <link rel="stylesheet" href="{#FS_PATH#}view/css/datepicker.css" />
-   <link rel="stylesheet" href="{#FS_PATH#}view/css/custom.css" />
+   <link rel="stylesheet" href="{#FS_PATH#}view/css/custom.css?updated={$fsc->today()}" />
    <link rel="stylesheet" href="{#FS_PATH#}plugins/menu_unico/view/css/mega-dropdown.css?updated={$fsc->today()}" />
    <script type="text/javascript" src="{#FS_PATH#}view/js/jquery.min.js"></script>
    <script type="text/javascript" src="{#FS_PATH#}view/js/bootstrap.min.js"></script>
@@ -174,7 +174,7 @@
                            </div>
                            <div class="col-sm-3 col-lg-2">
                               <div class="form-group">
-                                 <input class="form-control" type="text" name="query" autocomplete="off" required="" placeholder="Buscar">
+                                 <input class="form-control" type="text" name="query" autocomplete="off" required="" placeholder="Buscar" autofocus=""/>
                               </div>
                            </div>
                            <div class="col-sm-3 col-lg-2">
