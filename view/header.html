@@ -160,7 +160,7 @@
                         <div class="row">
                            <div class="col-sm-3 col-lg-2">
                               <div class="form-group">
-                                 <select name="page" class="form-control">
+                                 <select name="page" class="form-control" onchange="document.f_mega_menu.query.focus()">
                                     {if="$busca_articulos"}<option value="ventas_articulos">Artículos</option>{/if}
                                     {if="$busca_asientos"}<option value="contabilidad_asientos">Asientos</option>{/if}
                                     {if="$busca_clientes"}<option value="ventas_clientes" selected="">Clientes</option>{/if}
